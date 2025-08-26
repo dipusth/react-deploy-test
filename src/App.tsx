@@ -3,6 +3,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { Navbar } from "./components/common/Navbar";
+import { Button } from "./components/ui/button";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -10,6 +11,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <Button variant={"outline"}>Shadcn Buton</Button>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
