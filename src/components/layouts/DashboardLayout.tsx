@@ -5,6 +5,7 @@ import DashboardHeader from "@/components/common/DashboardHeader";
 
 import styled from "styled-components";
 import { DaasboardWraper } from "@/components/Style";
+import Sidebar from "@/components/common/sidebar/Sidebar";
 
 const DashboardLayout = () => {
   const location = useLocation();
@@ -20,6 +21,7 @@ const DashboardLayout = () => {
     <DaasboardWraper>
       <DashboardHeader />
       <DashboardBodyWrapper className="dark:text-white flex wrapper">
+        <Sidebar />
         <div className="flex-1 p-5">
           <Outlet />
         </div>
