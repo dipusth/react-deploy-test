@@ -1,8 +1,5 @@
-import {
-  deleteActiveUser,
-  getActiveUser,
-  type IuserType,
-} from "@/LocalStorage";
+import { deleteActiveUser, getActiveUser } from "@/LocalStorage";
+import type { IuserType } from "@/types/PostType";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
