@@ -1,3 +1,57 @@
+
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("./assets/fonts/Nohemi-Regular.eot");
+  src: url("./assets/fonts/Nohemi-Regular.eot?#iefix") format("embedded-opentype"),
+    url("./assets/fonts/Nohemi-Regular.woff2") format("woff2"),
+    url("./assets/fonts/Nohemi-Regular.woff") format("woff"),
+    url("./assets/fonts/Nohemi-Regular.ttf") format("truetype"),
+    url("./assets/fonts/Nohemi-Regular.svg#Nohemi-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("./assets/fonts/Nohemi-Bold.eot");
+  src: url("./assets/fonts/Nohemi-Bold.eot?#iefix") format("embedded-opentype"),
+    url("./assets/fonts/Nohemi-Bold.woff2") format("woff2"),
+    url("./assets/fonts/Nohemi-Bold.woff") format("woff"),
+    url("./assets/fonts/Nohemi-Bold.ttf") format("truetype"),
+    url("./assets/fonts/Nohemi-Bold.svg#Nohemi-Bold") format("svg");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("./assets/fonts/Nohemi-ExtraBold.eot");
+  src: url("./assets/fonts/Nohemi-ExtraBold.eot?#iefix") format("embedded-opentype"),
+    url("./assets/fonts/Nohemi-ExtraBold.woff2") format("woff2"),
+    url("./assets/fonts/Nohemi-ExtraBold.woff") format("woff"),
+    url("./assets/fonts/Nohemi-ExtraBold.ttf") format("truetype"),
+    url("./assets/fonts/Nohemi-ExtraBold.svg#Nohemi-ExtraBold") format("svg");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("./assets/fonts/Nohemi-Black.eot");
+  src: url("./assets/fonts/Nohemi-Black.eot?#iefix") format("embedded-opentype"),
+    url("./assets/fonts/Nohemi-Black.woff2") format("woff2"),
+    url("./assets/fonts/Nohemi-Black.woff") format("woff"),
+    url("./assets/fonts/Nohemi-Black.ttf") format("truetype"),
+    url("./assets/fonts/Nohemi-Black.svg#Nohemi-Black") format("svg");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -76,6 +130,21 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+@theme  {
+  --color-primary: #0285ab; 
+  --color-primary-100: #71dfff; 
+  --color-primary-400: #29bae4; 
+  --color-secondary: #0D9488; 
+  --color-secondary-50: #F9EBEC; 
+  --color-secondary-500: #C33241; 
+  --color-black: #565656; 
+  --color-black-800: #2B2B2B;
+  --color-gradient1: #39cdf8;
+  --color-gradient2: #027ea2;
+  --color-white: #fff;
+  --color-border: #d8d6d6;
+  --font-nohemi:'Nohemi', 'sans-serif'; 
+}
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
