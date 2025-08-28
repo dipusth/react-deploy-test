@@ -1,3 +1,4 @@
+import { SidebarWrapper } from "./Style";
 import { NavLink } from "react-router-dom";
 
 interface MenuItem {
@@ -13,7 +14,7 @@ const Sidebar = () => {
     { title: "Caching", url: "/dashboard/caching" },
   ];
   return (
-    <div className="sidebar">
+    <SidebarWrapper className="sidebar">
       <div className="mt-5 flex flex-col">
         {menuItems.map((item: MenuItem) => (
           <NavLink
@@ -30,7 +31,7 @@ const Sidebar = () => {
           </NavLink>
         ))}
       </div>
-    </div>
+    </SidebarWrapper>
   );
 };
 

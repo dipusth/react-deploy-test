@@ -17,8 +17,12 @@ import { NavLink } from "react-router-dom";
 
 import { deleteActiveUser, getActiveUser } from "@/LocalStorage";
 import type { IuserType } from "@/types/PostType";
+import { useAuth } from "@/hooks/useAuth";
+import CartIcon from "../ui/icon/CartIcon";
 const DashboardHeader = () => {
   const [activeUser, setActiveUser] = useState<IuserType>();
+  const { cart } = useAuth();
+  const hasCart = cart?.length || 0;
   const navigate = useNavigate();
   const handleLogOut = () => {
     deleteActiveUser();
@@ -38,6 +42,10 @@ const DashboardHeader = () => {
         <img src={Logo} alt="Online Shopping" />
       </NavLink>
       <div className="header-right flex gap-8 justify-between items-center">
+        <NavLink className="cart notification" to="/dashboard/cart">
+          <CartIcon className="text-slate-400" />
+          <span className="badge rounded-full bg-red-600">{hasCart}</span>
+        </NavLink>
         <NavLink className="cart notification" to="/notification">
           <Notification className="text-slate-400" />
           <span className="badge rounded-full bg-red-600">10</span>

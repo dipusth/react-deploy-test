@@ -6,10 +6,8 @@ type AuthContextType = {
   setCart: (value: ProductType[]) => void;
   //   login: (email: string, password: string) => void;
 };
-export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined
-);
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<ProductType[]>([]);
   return (
     <AuthContext.Provider value={{ cart, setCart }}>
@@ -17,3 +15,5 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     </AuthContext.Provider>
   );
 };
+
+export { AuthContext, AuthProvider };

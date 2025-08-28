@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Delete from "@/components/ui/icon/Delete";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useAuth } from "@/hooks/useAuth";
 import { fetchApi } from "@/hooks/useFetchApi";
 import type { ProductType } from "@/types/PostType";
 import { useEffect, useState } from "react";
@@ -12,7 +14,20 @@ const Product = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedProducts, setSelectedProducts] = useState<ProductType[]>([]);
   const productApi = "https://fakestoreapi.com/products";
-
+  const { cart, setCart } = useAuth();
+  const addToCart = () => {
+    const newCart = [...cart];
+    selectedProducts.forEach((product) => {
+      if (!newCart.find((item) => item.id === product.id)) {
+        console.log("if newCart", newCart);
+        return newCart.push(product);
+      }
+    });
+    console.log("newCart", newCart);
+    console.log("cart", cart);
+    setCart(newCart);
+    setSelectedProducts([]); // clearing selection after adding
+  };
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -114,7 +129,9 @@ const Product = () => {
                 <b>{selectedProducts.length}</b>{" "}
                 <i className="text-slate-500">items selected</i>
               </h4>
-              <Button className="bg-primary text-white">Add to Cart</Button>
+              <Button className="bg-primary text-white" onClick={addToCart}>
+                Add to Cart
+              </Button>
               <Button variant="outline" onClick={removeItem}>
                 <Delete className="text-red-600 w-5 cursor-pointer" />
                 Delete
@@ -124,86 +141,88 @@ const Product = () => {
         )}
       </div>
       <div className="h-[96%]">
-        <table border={1} className="w-full">
-          <thead>
-            <tr className="bg-gray-100 dark:bg-gray-700">
-              <th className="p-2">
-                <input type="checkbox" />
-              </th>
-              <th className="p-2">Item Name</th>
-              <th className="p-2">Price</th>
-              <th className="p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((product, index) => {
-              const hasData = selectedProducts.some(
-                (item) => item.id === product.id
-              );
-              console.log("const hasdata", hasData);
-              return (
-                <tr
-                  key={product.id}
-                  data-list={`tableList-${index}`}
-                  onClick={() => {
-                    console.log("hasData", hasData);
-                    if (hasData) {
-                      console.log("if hasData", hasData);
-                      setSelectedProducts((prev) => {
-                        return prev.filter((newp) => newp.id !== product.id);
-                      });
-                    } else {
-                      setSelectedProducts((prev) => [...prev, product]);
-                      console.log("else hasData", hasData);
-                    }
-                  }}
-                  className={`${
-                    hasData ? "bg-slate-200" : ""
-                  } border-b border-gray-200 dark:border-gray-700 table-list cursor-pointer`}
-                >
-                  <td className="p-2 text-center">
-                    <input
-                      type="checkbox"
-                      checked={hasData}
-                      style={{ accentColor: "#0285ab" }}
-                      data-checkbox={`check-${index}`}
-                    />
-                  </td>
-                  <td className="p-2">
-                    <div className="flex gap-4">
-                      <img
-                        src={product.image}
-                        alt="Iamge"
-                        width={50}
-                        height={50}
+        <ScrollArea className="h-full">
+          <table border={1} className="w-full">
+            <thead>
+              <tr className="bg-gray-100 dark:bg-gray-700">
+                <th className="p-2">
+                  <input type="checkbox" />
+                </th>
+                <th className="p-2">Item Name</th>
+                <th className="p-2">Price</th>
+                <th className="p-2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((product, index) => {
+                const hasData = selectedProducts.some(
+                  (item) => item.id === product.id
+                );
+                console.log("const hasdata", hasData);
+                return (
+                  <tr
+                    key={product.id}
+                    data-list={`tableList-${index}`}
+                    onClick={() => {
+                      console.log("hasData", hasData);
+                      if (hasData) {
+                        console.log("if hasData", hasData);
+                        setSelectedProducts((prev) => {
+                          return prev.filter((newp) => newp.id !== product.id);
+                        });
+                      } else {
+                        setSelectedProducts((prev) => [...prev, product]);
+                        console.log("else hasData", hasData);
+                      }
+                    }}
+                    className={`${
+                      hasData ? "bg-slate-200" : ""
+                    } border-b border-gray-200 dark:border-gray-700 table-list cursor-pointer`}
+                  >
+                    <td className="p-2 text-center">
+                      <input
+                        type="checkbox"
+                        checked={hasData}
+                        style={{ accentColor: "#0285ab" }}
+                        data-checkbox={`check-${index}`}
                       />
-                      <div className="w-full">
-                        <div className="flex mb-3">
-                          <h4> {product.title}</h4>
-                          <span className="self-start border px-3 py-0 rounded-sm ml-3 text-slate-400">
-                            {product.category}
+                    </td>
+                    <td className="p-2">
+                      <div className="flex gap-4">
+                        <img
+                          src={product.image}
+                          alt="Iamge"
+                          width={50}
+                          height={50}
+                        />
+                        <div className="w-full">
+                          <div className="flex mb-3">
+                            <h4> {product.title}</h4>
+                            <span className="self-start border px-3 py-0 rounded-sm ml-3 text-slate-400">
+                              {product.category}
+                            </span>
+                          </div>
+                          <span className="text-slate-500">
+                            {product.description}
                           </span>
                         </div>
-                        <span className="text-slate-500">
-                          {product.description}
-                        </span>
                       </div>
-                    </div>
-                  </td>
-                  <td className="p-2">${product.price.toFixed(2)}</td>
-                  <td className="p-2 text-center">
-                    <Link
-                      to={`/product/${product.id}`}
-                      className="bg-primary hover:bg-primary-400 text-white px-3 py-1 rounded"
-                    >
-                      View
-                    </Link>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                    </td>
+                    <td className="p-2">${product.price.toFixed(2)}</td>
+                    <td className="p-2 text-center">
+                      <Link
+                        to={`/product/${product.id}`}
+                        className="bg-primary hover:bg-primary-400 text-white px-3 py-1 rounded"
+                      >
+                        View
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </ScrollArea>
       </div>
     </div>
   );
